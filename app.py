@@ -7,17 +7,33 @@ import asyncio
 
 CHANNEL = "isaukywhite"
 
+joins = {}
+
 load_dotenv()
 
 class BotTwitch(Bot):
     @commands.command(name="hello")
-    async def hello(self, ctx):
+    async def hello(self, ctx: commands.Context):
         await ctx.send(f"Olá, {ctx.author.name}! Bem-vindo ao chat! 😊")
     
     @commands.command(name="projects")
-    async def projects(self, ctx):
+    async def projects(self, ctx: commands.Context):
         await ctx.send(f"Visualize os projetos para os streamers em twitchprojects.com")
         
+    @commands.command(name="join")
+    async def join(self, ctx: commands.Context):
+        channel_name = ctx.channel.name
+        if channel_name not in joins:
+            joins[channel_name] = []
+        joins[channel_name].append(ctx.author.name)
+        await ctx.send(f"{ctx.author.name} entrou na lista de participantes!")
+        
+    @commands.command(name="list")
+    async def list_join(self, ctx: commands.Context):
+        channel_name = ctx.channel.name
+        if channel_name not in joins:
+            joins[channel_name] = []
+        await ctx.send(f"Lista de participantes: {joins[channel_name]}")
 
 async def loop_message(bot: Bot):
     while True:
