@@ -21,7 +21,7 @@ class BotTwitch(Bot):
 
 async def loop_message(bot: Bot):
     while True:
-        sleep(60)
+        sleep(300)
         for channel in bot.connected_channels:
             await channel.send("Olá, pessoal! 😊, utilize o comando !projects para conhecer um pouco do nosso projeto!")
         
