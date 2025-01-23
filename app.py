@@ -2,10 +2,8 @@ from twitchio.ext import commands
 from src.bot import Bot
 from dotenv import load_dotenv
 from threading import Thread
-from time import sleep
 import asyncio
 import random
-import twitchio
 
 joins = {}
 
@@ -58,14 +56,8 @@ class BotTwitch(Bot):
 
 async def loop_message(bot: Bot):
     for channel in bot.connected_channels:
-        # if channel.name not in channel_searchs:
-        #     continue
-        # channels = channel_searchs[channel.name]
-        # if len(channels) == 0:
-        #     continue
-        # channel_search = channels[0]
-        # if not channel_search.live:
-        #     continue
+        if not bot.verify_is_online(channel.name):
+            continue
         await channel.send("Olá, pessoal! 😊, utilize o comando !projects para conhecer um pouco do nosso projeto!")
 
 async def main_loop(bot: Bot):

@@ -1,5 +1,6 @@
 from twitchio.ext import commands
 import os
+import requests
 
 def getenv(key) -> str:
     value = os.getenv(key)
@@ -11,6 +12,7 @@ class Bot(commands.Bot):
     def __init__(self, channels: list[str]):
         self.TOKEN = getenv("TOKEN")
         self.BOT_NICK = getenv("BOT_NICK")
+        self.CLIENT_ID = getenv("CLIENT_ID")
         super().__init__(
             token=self.TOKEN,
             prefix="!",
@@ -28,3 +30,14 @@ class Bot(commands.Bot):
         if message.author.name.lower() == self.BOT_NICK.lower():
             return
         await self.handle_commands(message)
+        
+    def verify_is_online(self, channel: str) -> bool:
+        url = f'https://api.twitch.tv/helix/streams?user_login={channel}'
+        response = requests.get(
+            url,
+            headers={
+                "Authorization": "Bearer " + self.TOKEN.split(":")[1],
+                "Client-Id": self.CLIENT_ID,
+            }
+        )
+        return response.json()["data"] != []
