@@ -1,7 +1,7 @@
 import requests
 
 def daily_message():
-    url = "https://api.adviceslip.com/advice"
+    url = "https://api.kanye.rest"
     response = requests.get(url)
-    advice = response.json()['slip']['advice']
+    advice = response.json()['quote']
     return advice
