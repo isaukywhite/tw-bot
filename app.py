@@ -13,7 +13,7 @@ class BotTwitch(Bot):
     
     @commands.command(name="projects")
     async def isauky(self, ctx):
-        await ctx.send(f"Visualize os projetos para os streamers em https://twitchprojects.com")
+        await ctx.send(f"Visualize os projetos para os streamers em twitchprojects.com")
 
 if __name__ == "__main__":
     channels = [CHANNEL]
