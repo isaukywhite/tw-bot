@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from threading import Thread
 from time import sleep
 import asyncio
+import random
 
 CHANNEL = "isaukywhite"
 
@@ -41,6 +42,20 @@ class BotTwitch(Bot):
             await ctx.send("Nenhum participante na lista!")
         else:
             await ctx.send(f"Lista de participantes: {joins[channel_name]}")
+            
+    @commands.command(name="lottery")
+    async def lottery(self, ctx: commands.Context):
+        channel_name = ctx.channel.name
+        user_name = ctx.author.name
+        if channel_name != user_name:
+            return
+        if channel_name not in joins:
+            joins[channel_name] = []
+        if len(joins[channel_name]) == 0:
+            await ctx.send("Nenhum participante na lista!")
+        else:
+            winner = random.choice(joins[channel_name])
+            await ctx.send(f"O vencedor é: {winner}")
 
 async def loop_message(bot: Bot):
     while True:
