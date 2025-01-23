@@ -28,4 +28,6 @@ async def loop_message(bot: Bot):
 if __name__ == "__main__":
     channels = [CHANNEL]
     bot = BotTwitch(channels)
+    tr = Thread(target=loop_message, args=(bot,))
+    tr.start()
     bot.run()
