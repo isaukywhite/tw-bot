@@ -4,11 +4,11 @@ import random
 def daily_message() -> str | None:
     random_number = random.randint(1, 3)
     if random_number == 1:
-        return kenye_quote()
-    elif random_number == 2:
-        return chuck_norris()
-    else:
         return None
+    elif random_number == 2:
+        return kenye_quote()
+    else:
+        return chuck_norris()
 
 def kenye_quote():
     url = "https://api.kanye.rest"

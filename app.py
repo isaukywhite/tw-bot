@@ -59,6 +59,13 @@ class BotTwitch(Bot):
         else:
             winner = random.choice(joins[channel_name])
             await ctx.send(f"O vencedor é: {winner}")
+            
+    @commands.command(name="message")
+    async def message(self, ctx: commands.Context):
+        message = daily_message()
+        while message == None:
+            message = daily_message()
+        await ctx.send(message)
 
 async def loop_message(bot: Bot):
     for channel in bot.connected_channels:
@@ -75,7 +82,7 @@ async def main_loop(bot: Bot):
             await loop_message(bot)
         except Exception as e:
             print(f"Erro: {e}")
-        await asyncio.sleep(30)
+        await asyncio.sleep(300)
         
         
 def start_loop(bot: Bot):
