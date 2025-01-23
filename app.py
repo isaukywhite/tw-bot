@@ -13,6 +13,10 @@ class BotTwitch(Bot):
     @commands.command(name="hello")
     async def hello(self, ctx: commands.Context):
         await ctx.send(f"Olá, {ctx.author.name}! Bem-vindo ao chat! 😊")
+        
+    @commands.command(name="test")
+    async def test(self, ctx: commands.Context):
+        await ctx.send(f"{ctx.author.name} isso e apenas um teste!")
     
     @commands.command(name="projects")
     async def projects(self, ctx: commands.Context):
