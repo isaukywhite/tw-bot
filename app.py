@@ -12,7 +12,7 @@ class BotTwitch(Bot):
         await ctx.send(f"Olá, {ctx.author.name}! Bem-vindo ao chat! 😊")
     
     @commands.command(name="projects")
-    async def isauky(self, ctx):
+    async def projects(self, ctx):
         await ctx.send(f"Visualize os projetos para os streamers em twitchprojects.com")
 
 if __name__ == "__main__":
