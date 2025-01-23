@@ -5,6 +5,7 @@ from threading import Thread
 import asyncio
 import random
 from src.database import Database
+from src.daily_message import daily_message
 
 joins = {}
 
@@ -64,6 +65,7 @@ async def loop_message(bot: Bot):
         if not bot.verify_is_online(channel.name):
             continue
         await channel.send("Olá, pessoal! 😊, utilize o comando !projects para conhecer um pouco do nosso projeto!")
+        await channel.send(f"Conselho do dia: {daily_message()}")
 
 async def main_loop(bot: Bot):
     while True:
