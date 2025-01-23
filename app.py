@@ -37,7 +37,10 @@ class BotTwitch(Bot):
         channel_name = ctx.channel.name
         if channel_name not in joins:
             joins[channel_name] = []
-        await ctx.send(f"Lista de participantes: {joins[channel_name]}")
+        if len(joins[channel_name]) == 0:
+            await ctx.send("Nenhum participante na lista!")
+        else:
+            await ctx.send(f"Lista de participantes: {joins[channel_name]}")
 
 async def loop_message(bot: Bot):
     while True:
