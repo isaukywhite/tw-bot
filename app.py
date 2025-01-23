@@ -48,8 +48,7 @@ class BotTwitch(Bot):
         channel_name = ctx.channel.name
         user_name = ctx.author.name
         if channel_name != user_name:
-            await ctx.send(f"{user_name}, você não pode realizar essa ação no canal {channel_name}!")
-            return
+            return await ctx.send(f"{user_name}, você não pode realizar essa ação no canal {channel_name}!")
         if channel_name not in joins:
             joins[channel_name] = []
         if len(joins[channel_name]) == 0:
