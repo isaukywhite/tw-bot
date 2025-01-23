@@ -49,6 +49,7 @@ class BotTwitch(Bot):
     async def lottery(self, ctx: commands.Context):
         channel_name = ctx.channel.name
         user_name = ctx.author.name
+        print(f"Lottery => channel_name: {channel_name} - user_name: {user_name}")
         if channel_name != user_name:
             return
         if channel_name not in joins:
