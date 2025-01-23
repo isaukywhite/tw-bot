@@ -1,4 +1,5 @@
 from twitchio.ext import commands
+from datetime import datetime
 import os
 import requests
 
@@ -29,6 +30,8 @@ class Bot(commands.Bot):
             return
         if message.author.name.lower() == self.BOT_NICK.lower():
             return
+        now = datetime.now()
+        print(f"{now.strftime('%Y-%m-%d %H:%M:%S')} => {message.channel.name} => {message.author.name}: {message.content}")
         await self.handle_commands(message)
         
     def verify_is_online(self, channel: str) -> bool:
