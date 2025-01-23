@@ -3,6 +3,7 @@ from src.bot import Bot
 from dotenv import load_dotenv
 from threading import Thread
 from time import sleep
+import asyncio
 
 CHANNEL = "isaukywhite"
 
@@ -24,10 +25,12 @@ async def loop_message(bot: Bot):
         for channel in bot.connected_channels:
             await channel.send("Olá, pessoal! 😊, utilize o comando !projects para conhecer um pouco do nosso projeto!")
         
+def start_loop(bot: Bot):
+    asyncio.run(loop_message(bot))
 
 if __name__ == "__main__":
     channels = [CHANNEL]
     bot = BotTwitch(channels)
-    tr = Thread(target=loop_message, args=(bot,))
+    tr = Thread(target=start_loop, args=(bot,))
     tr.start()
     bot.run()
