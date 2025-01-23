@@ -64,8 +64,10 @@ async def loop_message(bot: Bot):
     for channel in bot.connected_channels:
         if not bot.verify_is_online(channel.name):
             continue
-        await channel.send("Olá, pessoal! 😊, utilize o comando !projects para conhecer um pouco do nosso projeto!")
-        await channel.send(daily_message())
+        message = daily_message()
+        if message == None:
+            message = "Olá, pessoal! 😊, utilize o comando !projects para conhecer um pouco do nosso projeto!"
+        await channel.send(message)
 
 async def main_loop(bot: Bot):
     while True:
