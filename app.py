@@ -47,15 +47,16 @@ class BotTwitch(Bot):
     async def lottery(self, ctx: commands.Context):
         channel_name = ctx.channel.name
         user_name = ctx.author.name
-        if channel_name != user_name:
-            return await ctx.send(f"{user_name}, você não pode realizar essa ação no canal {channel_name}!")
-        if channel_name not in joins:
-            joins[channel_name] = []
-        if len(joins[channel_name]) == 0:
-            await ctx.send("Nenhum participante na lista!")
+        if channel_name == user_name:
+            if channel_name not in joins:
+                joins[channel_name] = []
+            if len(joins[channel_name]) == 0:
+                await ctx.send("Nenhum participante na lista!")
+            else:
+                winner = random.choice(joins[channel_name])
+                await ctx.send(f"O vencedor é: {winner}")
         else:
-            winner = random.choice(joins[channel_name])
-            await ctx.send(f"O vencedor é: {winner}")
+            await ctx.send(f"{user_name}, você não pode realizar essa ação no canal {channel_name}!")
 
 async def loop_message(bot: Bot):
     while True:
