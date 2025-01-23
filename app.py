@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from threading import Thread
 import asyncio
 import random
+from src.database import Database
 
 joins = {}
 
@@ -80,11 +81,9 @@ def start_loop(bot: Bot):
 
 
 if __name__ == "__main__":
-    channels = [
-        "isaukywhite",
-        "GugaSilvaDev",
-        "dev_navarro",
-    ]
+    db = Database()
+    result = db.query("SELECT name FROM users")
+    channels = [user[0] for user in result]
     bot = BotTwitch(channels)
     tr = Thread(target=start_loop, args=(bot,))
     tr.start()
