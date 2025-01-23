@@ -25,8 +25,12 @@ class BotTwitch(Bot):
         channel_name = ctx.channel.name
         if channel_name not in joins:
             joins[channel_name] = []
-        joins[channel_name].append(ctx.author.name)
-        await ctx.send(f"{ctx.author.name} entrou na lista de participantes!")
+        if ctx.author.name in joins[channel_name]:
+            await ctx.send(f"{ctx.author.name} já está na lista de participantes!")
+        else:
+            joins[channel_name].append(ctx.author.name)
+            await ctx.send(f"{ctx.author.name} entrou na lista de participantes!")
+        
         
     @commands.command(name="list")
     async def list_join(self, ctx: commands.Context):
