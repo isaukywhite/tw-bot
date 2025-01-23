@@ -5,8 +5,7 @@ from threading import Thread
 from time import sleep
 import asyncio
 import random
-
-CHANNEL = "isaukywhite"
+import twitchio
 
 joins = {}
 
@@ -58,16 +57,38 @@ class BotTwitch(Bot):
             await ctx.send(f"O vencedor é: {winner}")
 
 async def loop_message(bot: Bot):
+    for channel in bot.connected_channels:
+        # if channel.name not in channel_searchs:
+        #     continue
+        # channels = channel_searchs[channel.name]
+        # if len(channels) == 0:
+        #     continue
+        # channel_search = channels[0]
+        # if not channel_search.live:
+        #     continue
+        await channel.send("Olá, pessoal! 😊, utilize o comando !projects para conhecer um pouco do nosso projeto!")
+
+async def main_loop(bot: Bot):
     while True:
-        sleep(300)
-        for channel in bot.connected_channels:
-            await channel.send("Olá, pessoal! 😊, utilize o comando !projects para conhecer um pouco do nosso projeto!")
+        try:
+            await loop_message(bot)
+        except Exception as e:
+            print(f"Erro: {e}")
+        await asyncio.sleep(300)
+        
         
 def start_loop(bot: Bot):
-    asyncio.run(loop_message(bot))
+    loop = asyncio.new_event_loop()
+    loop.create_task(main_loop(bot))
+    loop.run_forever()
+
 
 if __name__ == "__main__":
-    channels = [CHANNEL]
+    channels = [
+        "isaukywhite",
+        "GugaSilvaDev",
+        "dev_navarro",
+    ]
     bot = BotTwitch(channels)
     tr = Thread(target=start_loop, args=(bot,))
     tr.start()
