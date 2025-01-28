@@ -82,7 +82,7 @@ async def main_loop(bot: Bot):
             await loop_message(bot)
         except Exception as e:
             print(f"Erro: {e}")
-        await asyncio.sleep(300)
+        await asyncio.sleep(600)
         
         
 def start_loop(bot: Bot):
